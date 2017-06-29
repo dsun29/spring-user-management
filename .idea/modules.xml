@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.wall.iml" filepath="$PROJECT_DIR$/.idea/modules/org.wall.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.wall_main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.wall_main.iml" group="org.wall" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.wall_test.iml" filepath="$PROJECT_DIR$/.idea/modules/org.wall_test.iml" group="org.wall" />
+    </modules>
+  </component>
+</project>
