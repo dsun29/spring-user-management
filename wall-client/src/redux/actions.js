@@ -70,3 +70,40 @@ export const Register_Succeed_Action = (response) => {
     }
 }
 
+/*********************************************************************************/
+
+export const Login_Action = (email, password, recaptchaResponse) => {
+
+
+    return function (dispatch) {
+        dispatch(Open_Spinner());
+        return reqwest({
+            url: 'http://localhost:8090/login',
+            method: 'get',
+            type: 'json',
+            crossOrigin: true,
+            withCredentials: false,
+            error: function (err) {
+                dispatch(Open_MessageBox('danger', 'Unexpected Error', '<h3>' + err.status + '-' + err.statusText + '</h3>' + err.responseText));
+                console.log('error in Login_Action,', err);
+            },
+
+            success: function (response) {
+                console.log('successfully Login_Action, ', response);
+
+                dispatch(Close_Spinner());
+                dispatch(Register_Succeed_Action(response));
+            }
+
+        })
+    }
+}
+
+export const Login_Succeed_Action = (response) => {
+    return {
+        type: 'Login_Succeed',
+        EV_AGREEMENT_TEXTS: response.EV_AGREEMENT_TEXTS,
+        EV_FERPA_RIGHTS_TEXTS: response.EV_FERPA_RIGHTS_TEXTS,
+        EV_FERPA_DIRECTORY_TEXTS: response.EV_FERPA_DIRECTORY_TEXTS
+    }
+}

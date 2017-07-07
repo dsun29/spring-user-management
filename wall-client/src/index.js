@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter } from 'react-router-redux'
 import RegisterContainer from './containers/RegisterContainer'
+import LoginContainer from './containers/LoginContainer'
 import registerServiceWorker from './registerServiceWorker';
 
 var user = null;
@@ -32,8 +33,9 @@ ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <div>
-                <Route path="/login" component={RegisterContainer}/>
-                <Route path="/*" component={RegisterContainer}/>
+                <Route path="/register" component={RegisterContainer}/>
+                <Route path="/login" component={LoginContainer}/>
+
             </div>
         </ConnectedRouter>
     </Provider>, document.getElementById('root'));
