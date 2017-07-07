@@ -11,8 +11,9 @@ export default class Layout extends React.Component {
     render() {
         return (
             <div>
+                <SpinnerContainer/>
                 <HeaderContainer />
-                <SpinnerContainer />
+
                 <ModalDialogContainer />
                 <div className="container">
                     {this.props.children}

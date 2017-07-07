@@ -7,18 +7,23 @@ import React from 'react'
 const ModalDialogComponent = ({showMessageBox, messageBoxTitle, messageBoxMessage, messageBoxType}) =>
     (
 
-        showMessageBox ? ( <div className="modal fade" role="dialog">
+        showMessageBox ? ( <div className="modal show" role="dialog" aria-hidden="true">
                 <div className="modal-dialog modal-md">
                     <div className="modal-content">
-                        <div className="modal-header">
-                            <h4 className="modal-title">{messageBoxTitle}</h4>
-                        </div>
+
+                        {
+                            ( messageBoxTitle === null ) ? null: (<div className="modal-header">
+                                <h4 className="modal-title">{messageBoxTitle}</h4>
+                            </div>)
+                        }
+
+
                         <div className="modal-body">
                             <p>{messageBoxMessage}</p>
                         </div>
 
                         <div className="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" className={'btn btn-' + messageBoxType} data-dismiss="modal">Close</button>
                         </div>
 
                     </div>

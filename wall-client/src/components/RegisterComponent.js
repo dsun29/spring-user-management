@@ -8,6 +8,8 @@ export default class RegisterComponent extends Component {
     constructor(props) {
         super(props);
 
+        this.props = props;
+
         this.state = {
             captchaError: null,
             acceptedCaptcha: false
@@ -19,7 +21,8 @@ export default class RegisterComponent extends Component {
         this.recaptchaVerifyCallback = this.recaptchaVerifyCallback.bind(this);
     }
 
-    validateForm() {
+    validateForm(e) {
+        e.preventDefault();
 
         var foundError = false;
 
@@ -36,12 +39,12 @@ export default class RegisterComponent extends Component {
             }
         }
         var pwd = this.pwdInput.value;
-        if(pwd == null || pwd.length < 8){
+        if(pwd === null || pwd.length < 8){
             this.pwdInput.setCustomValidity('Password must contain a minimu of 8 characters');
             foundError = true;
         }
         var pwd2 = this.pwd2Input.value;
-        if(pwd2 == null || pwd2 !== pwd){
+        if(pwd2 === null || pwd2 !== pwd){
             this.pwd2Input.setCustomValidity('The passwords do not match');
             foundError = true;
         }
@@ -50,14 +53,20 @@ export default class RegisterComponent extends Component {
             this.setState({
                 captchaError: 'Are you a human being?'
             });
+            foundError = true;
+
         }
 
+        if ( foundError === false ){
+            console.log('No error found!!');
+            this.props.register(email, pwd, null);
+        }
 
         return foundError;
     }
 
     recaptchaSucceedCallback() {
-        console.log('You did it');
+
 
     }
 
@@ -84,7 +93,7 @@ export default class RegisterComponent extends Component {
                 <Layout>
                     <div className="col-sm-6 col-sm-offset-3">
                         <h1>Register</h1>
-                        <form>
+                        <form method="post" onSubmit={this.validateForm}>
                             <div className="form-group">
                                 <label htmlFor="email">Email address:</label>
                                 <input type="email" className="form-control" id="email" required="" placeholder="email address" ref={ (input) => { this.emailInput = input }} />
@@ -117,7 +126,7 @@ export default class RegisterComponent extends Component {
                             }
 
 
-                            <button type="submit" className="btn btn-success btn-block" onClick={this.validateForm}>Send Me Verification Email</button>
+                            <button type="submit" className="btn btn-success btn-block">Send Me Verification Email</button>
                             <div className="login-help">
                                 <a href="login.html">Sign In</a>
                             </div>
